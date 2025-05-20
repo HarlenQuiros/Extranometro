@@ -30,20 +30,25 @@
       max-width: 500px;
     }
 
-    .bar-bg {
-      width: 100%;
+    .bar-wrapper {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 2px;
       background-color: #f0f0f0;
       border-radius: 50px;
       overflow: hidden;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      height: 40px;
       margin-bottom: 10px;
     }
 
-    .bar-fill {
-      height: 40px;
+    .bar-segment {
+      background-color: transparent;
+      transition: background-color 0.5s;
+    }
+
+    .bar-segment.filled {
       background: linear-gradient(90deg, #ff4d4d, #cc0000);
-      width: 0;
-      transition: width 1s ease-in-out;
     }
 
     .scale {
@@ -52,6 +57,7 @@
       font-size: 0.9rem;
       color: #333;
       margin-top: 5px;
+      padding: 0 25px;
     }
 
     .level-label {
@@ -66,7 +72,7 @@
         font-size: 2rem;
       }
 
-      .bar-fill {
+      .bar-wrapper {
         height: 30px;
       }
 
@@ -84,8 +90,8 @@
 
   <h1>Extrañómetro ❤️</h1>
   <div class="container">
-    <div class="bar-bg">
-      <div class="bar-fill" id="barFill"></div>
+    <div class="bar-wrapper" id="barWrapper">
+      <!-- Segmentos generados por JS -->
     </div>
     <div class="scale">
       <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
@@ -96,13 +102,21 @@
 
   <script>
     // Cambiá este valor del 1 al 10
-    let extranoNivel = 1;
+    let extranoNivel = 2;
 
-    const barFill = document.getElementById('barFill');
+    const barWrapper = document.getElementById('barWrapper');
     const label = document.getElementById('levelLabel');
 
-    const porcentaje = (extranoNivel / 10) * 100;
-    barFill.style.width = porcentaje + '%';
+    // Crear 10 segmentos
+    for (let i = 1; i <= 10; i++) {
+      const segment = document.createElement('div');
+      segment.classList.add('bar-segment');
+      if (i <= extranoNivel) {
+        segment.classList.add('filled');
+      }
+      barWrapper.appendChild(segment);
+    }
+
     label.textContent = `Nivel de extrañeza: ${extranoNivel}/10`;
   </script>
 
