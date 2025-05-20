@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Extrañómetro</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #ffe6e6, #fff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #b30000;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .bar-bg {
+      width: 100%;
+      background-color: #f0f0f0;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
+    }
+
+    .bar-fill {
+      height: 40px;
+      background: linear-gradient(90deg, #ff4d4d, #cc0000);
+      width: 0;
+      transition: width 1s ease-in-out;
+    }
+
+    .scale {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: #333;
+      margin-top: 5px;
+    }
+
+    .level-label {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #660000;
+    }
+
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .bar-fill {
+        height: 30px;
+      }
+
+      .level-label {
+        font-size: 1rem;
+      }
+
+      .scale {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Extrañómetro ❤️</h1>
+  <div class="container">
+    <div class="bar-bg">
+      <div class="bar-fill" id="barFill"></div>
+    </div>
+    <div class="scale">
+      <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+      <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+    </div>
+    <div class="level-label" id="levelLabel"></div>
+  </div>
+
+  <script>
+    // Cambiá este valor del 1 al 10
+    let extranoNivel = 3;
+
+    const barFill = document.getElementById('barFill');
+    const label = document.getElementById('levelLabel');
+
+    const porcentaje = (extranoNivel / 10) * 100;
+    barFill.style.width = porcentaje + '%';
+    label.textContent = `Nivel de extrañeza: ${extranoNivel}/10`;
+  </script>
+
+</body>
+</html>
